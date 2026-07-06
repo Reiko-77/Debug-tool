@@ -543,6 +543,70 @@ h3 {
   font-size: 12px;
 }
 
+.seller-actions-panel {
+  background: #fff;
+}
+
+.allowlist-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.allowlist-actions button,
+.seller-action-item button {
+  border: 1px solid #d8dde5;
+  border-radius: 5px;
+  background: #f7f9fb;
+  color: #2d3541;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.allowlist-actions button {
+  padding: 7px 10px;
+}
+
+.seller-action-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.seller-action-item {
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #edf0f4;
+  border-radius: 8px;
+  background: #fbfcfd;
+}
+
+.seller-action-item svg {
+  color: var(--muted);
+}
+
+.seller-action-item strong,
+.seller-action-item span {
+  display: block;
+}
+
+.seller-action-item p {
+  margin: 4px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.seller-action-item > div > span {
+  color: #8a94a3;
+  font-size: 11px;
+}
+
+.seller-action-item button {
+  padding: 6px 12px;
+}
+
 .module-map-panel {
   background: linear-gradient(180deg, #fff, #fbfcff);
 }

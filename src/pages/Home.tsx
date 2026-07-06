@@ -3,6 +3,7 @@ import { AuditAndHistory } from "@/components/AuditAndHistory";
 import { BatchQuery } from "@/components/BatchQuery";
 import { DetailDrawer } from "@/components/DetailDrawer";
 import { DiagnosticSummary } from "@/components/DiagnosticSummary";
+import { SellerActions } from "@/components/SellerActions";
 import { SellerSummary } from "@/components/SellerSummary";
 import { Sidebar } from "@/components/Sidebar";
 import { Timeline } from "@/components/Timeline";
@@ -15,6 +16,7 @@ import {
   historyItems,
   requirementModules,
   seller,
+  sellerActions,
   timelineNodes,
 } from "@/data/mockData";
 
@@ -49,8 +51,8 @@ export default function Home() {
               <button>Search</button>
             </div>
             <p>
-              Recent search: ShopCrazee (7494637214381212924) · Sovereign Commerce
-              (7495790816548981510)
+              Recent search: ShopCrazee (7494637214381212924) · VAULTED TCG (7494657534162273561) ·
+              Sovereign Commerce (7495790816548981510)
             </p>
           </section>
 
@@ -58,8 +60,9 @@ export default function Home() {
           <DiagnosticSummary
             seller={seller}
             diagnostic={diagnostic}
-            onOpenVendorDetail={() => handleSelectNode("vendor")}
+            onOpenBlockedDetail={() => handleSelectNode("pipo")}
           />
+          <SellerActions actions={sellerActions} onOpenDetail={handleSelectNode} />
           <section className="panel module-map-panel">
             <div className="panel-title-row">
               <div>

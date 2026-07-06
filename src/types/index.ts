@@ -49,6 +49,15 @@ export interface TimelineNode {
   isCurrentBlocker?: boolean;
 }
 
+export interface SellerAction {
+  id: string;
+  title: string;
+  status: Extract<ReviewStatus, "pass" | "reject" | "pending">;
+  time: string;
+  detailNodeId: string;
+  note: string;
+}
+
 export interface EvidenceFile {
   id: string;
   type: string;

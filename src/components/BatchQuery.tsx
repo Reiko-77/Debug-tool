@@ -7,7 +7,7 @@ interface BatchQueryProps {
 }
 
 export function BatchQuery({ results }: BatchQueryProps) {
-  const [query, setQuery] = useState("7495790816548981510\n7494637214381212924\n7494657534162273561");
+  const [query, setQuery] = useState("7494637214381212924\n7495790816548981510\n7494657534162273561");
   const [hasRun, setHasRun] = useState(true);
   const [exported, setExported] = useState(false);
   const sellerIds = query

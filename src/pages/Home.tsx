@@ -13,6 +13,7 @@ import {
   details,
   diagnostic,
   historyItems,
+  requirementModules,
   seller,
   timelineNodes,
 } from "@/data/mockData";
@@ -59,6 +60,24 @@ export default function Home() {
             diagnostic={diagnostic}
             onOpenVendorDetail={() => handleSelectNode("vendor")}
           />
+          <section className="panel module-map-panel">
+            <div className="panel-title-row">
+              <div>
+                <p className="eyebrow">Latest PRD mapping</p>
+                <h3>8 个核心需求模块</h3>
+              </div>
+              <span className="safe-mock-badge">Static safe mock</span>
+            </div>
+            <div className="module-grid">
+              {requirementModules.map((module) => (
+                <article className="module-card" key={module.id}>
+                  <strong>{module.title}</strong>
+                  <span>{module.demoSurface}</span>
+                  <p>{module.acceptance}</p>
+                </article>
+              ))}
+            </div>
+          </section>
           <Timeline nodes={timelineNodes} selectedId={selectedNodeId} onSelect={handleSelectNode} />
           <AuditAndHistory auditNodes={auditNodes} historyItems={historyItems} />
           <BatchQuery results={batchResults} />

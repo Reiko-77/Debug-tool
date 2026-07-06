@@ -21,22 +21,22 @@ export function DiagnosticSummary({ seller, diagnostic, onOpenVendorDetail }: Di
         <div className="diag-item urgent">
           <ShieldAlert size={18} />
           <div>
-            <span>最新失败</span>
-            <strong>{diagnostic.latestFailureTime}</strong>
+            <span>Blocked Since</span>
+            <strong>{diagnostic.blockedSince}</strong>
           </div>
         </div>
         <div className="diag-item">
           <AlertTriangle size={18} />
           <div>
-            <span>失败原因</span>
+            <span>Blocking Reason</span>
             <strong>{diagnostic.reason}</strong>
           </div>
         </div>
         <div className="diag-item">
           <CheckCircle2 size={18} />
           <div>
-            <span>责任方</span>
-            <strong>{diagnostic.owner}</strong>
+            <span>Blocked Stage</span>
+            <strong>{diagnostic.blockedStage}</strong>
           </div>
         </div>
       </div>

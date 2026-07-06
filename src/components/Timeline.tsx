@@ -1,6 +1,6 @@
 import { Clock3 } from "lucide-react";
 import type { TimelineNode } from "@/types";
-import { reviewStatusLabel, statusClass } from "./status";
+import { reviewStatusDescription, reviewStatusLabel, statusClass } from "./status";
 
 interface TimelineProps {
   nodes: TimelineNode[];
@@ -13,8 +13,8 @@ export function Timeline({ nodes, selectedId, onSelect }: TimelineProps) {
     <section className="panel timeline-panel">
       <div className="panel-title-row">
         <div>
-          <p className="eyebrow">Onboarding process</p>
-          <h3>可解释时间线</h3>
+          <p className="eyebrow">Unified onboarding nodes</p>
+          <h3>Onboarding process + TTS reviews</h3>
         </div>
         <div className="view-switch">
           <button className="active">业务流程</button>
@@ -38,19 +38,44 @@ export function Timeline({ nodes, selectedId, onSelect }: TimelineProps) {
             <div className="node-card">
               <div className="node-card-head">
                 <strong>{node.name}</strong>
-                <span className={statusClass(node.status)}>{reviewStatusLabel(node.status)}</span>
+                <span
+                  className={statusClass(node.status)}
+                  title={`${reviewStatusLabel(node.status)}：${reviewStatusDescription(node.status)}`}
+                >
+                  {reviewStatusLabel(node.status)}
+                </span>
               </div>
               <p>{node.description}</p>
+              <dl className="node-facts">
+                <div>
+                  <dt>Latest Review</dt>
+                  <dd>{node.latestReviewTime}</dd>
+                </div>
+                <div>
+                  <dt>Reason</dt>
+                  <dd>{node.reason}</dd>
+                </div>
+              </dl>
               <div className="node-meta">
                 <span>
                   <Clock3 size={12} />
                   {node.startTime}
                 </span>
-                <span>{node.owner}</span>
+                <span>{node.source}</span>
+              </div>
+              <div className={node.detailAvailable ? "detail-state available" : "detail-state unavailable"}>
+                {node.detailAvailable ? "Detail available" : `No Detail: ${node.noDetailReason}`}
               </div>
               {node.isCurrentBlocker && <div className="blocker-label">当前阻塞点</div>}
             </div>
           </button>
+        ))}
+      </div>
+      <div className="status-legend">
+        {(["pass", "pending", "reject", "skipped", "unknown", "no-detail"] as const).map((status) => (
+          <span className={statusClass(status)} title={reviewStatusDescription(status)} key={status}>
+            {reviewStatusLabel(status)}
+          </span>
         ))}
       </div>
     </section>

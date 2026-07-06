@@ -1,6 +1,13 @@
 export type SellerStatus = "Active" | "Rejected" | "Pending" | "In Review";
-export type ReviewStatus = "pass" | "reject" | "pending" | "skipped";
+export type ReviewStatus = "pass" | "reject" | "pending" | "skipped" | "unknown" | "no-detail";
 export type EvidenceStatus = "available" | "expired" | "missing";
+
+export interface RequirementModule {
+  id: string;
+  title: string;
+  demoSurface: string;
+  acceptance: string;
+}
 
 export interface Seller {
   id: string;
@@ -19,7 +26,7 @@ export interface Seller {
 
 export interface Diagnostic {
   blockedStage: string;
-  latestFailureTime: string;
+  blockedSince: string;
   reason: string;
   owner: string;
   nextAction: string;
@@ -34,6 +41,11 @@ export interface TimelineNode {
   startTime: string;
   endTime?: string;
   description?: string;
+  latestReviewTime: string;
+  reason: string;
+  detailAvailable: boolean;
+  noDetailReason?: string;
+  source: "Case Tracking" | "TTS Review" | "QA Tool" | "Thunder";
   isCurrentBlocker?: boolean;
 }
 
@@ -42,6 +54,17 @@ export interface EvidenceFile {
   type: string;
   name: string;
   status: EvidenceStatus;
+  previewText: string;
+  failureReason?: string;
+  fallback?: string;
+}
+
+export interface ReviewAttempt {
+  time: string;
+  source: string;
+  result: ReviewStatus;
+  keyFields: Record<string, string>;
+  reason: string;
 }
 
 export interface ReviewDetail {
@@ -54,6 +77,8 @@ export interface ReviewDetail {
   rejectCode?: string;
   reason?: string;
   nextAction?: string;
+  emptyState?: string;
+  attempts: ReviewAttempt[];
   evidence: EvidenceFile[];
   systemFields: Record<string, string>;
 }
@@ -63,12 +88,18 @@ export interface AuditNode {
   title: string;
   status: ReviewStatus;
   result: string;
+  taskId: string;
+  next?: string[];
+  isException?: boolean;
 }
 
 export interface HistoryItem {
+  attempt: string;
   time: string;
+  endTime?: string;
   title: string;
   status: ReviewStatus;
+  source: "Historical" | "Current";
   note: string;
 }
 

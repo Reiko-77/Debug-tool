@@ -33,6 +33,8 @@
 - 已实现 Detail 抽屉、Evidence 资料卡片、QA Tool DAG、Thunder 历史和批量查询。
 - 已通过浏览器验证：页面加载、点击时间线节点、点击摘要按钮均可打开 Vendor Detail。
 - 已通过 `npm run lint`、`npm run check`、`npm run build`。
+- 已修复 Rollup macOS 原生包签名失败风险：将 `rollup` 解析为官方 `@rollup/wasm-node`，绕开 native `.node` 加载。
+- 已再次通过质量门禁：`npm run lint`、`npm run check`、`npm run build` 等价命令全部通过。
 
 ## 下一步
 

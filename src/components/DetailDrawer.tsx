@@ -45,7 +45,32 @@ export function DetailDrawer({ detail, open, onClose }: DetailDrawerProps) {
               <div className="reason-card">
                 <strong>{detail.reason || "暂无拒绝原因"}</strong>
                 <p>{detail.nextAction || "当前无需额外操作。"}</p>
+                {detail.emptyState && <p className="empty-explain">{detail.emptyState}</p>}
               </div>
+            </section>
+
+            <section className="drawer-section">
+              <h3>审核记录拆分</h3>
+              {detail.attempts.length ? (
+                <div className="attempt-list">
+                  {detail.attempts.map((attempt) => (
+                    <article className="attempt-card" key={`${attempt.time}-${attempt.source}`}>
+                      <div className="attempt-head">
+                        <strong>{attempt.time}</strong>
+                        <span className={statusClass(attempt.result)}>{reviewStatusLabel(attempt.result)}</span>
+                      </div>
+                      <p>{attempt.source} · {attempt.reason}</p>
+                      <div className="system-grid">
+                        {Object.entries(attempt.keyFields).map(([label, value]) => (
+                          <Field label={label} value={value} key={label} />
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-state">{detail.emptyState || "该节点暂无审核记录。"}</div>
+              )}
             </section>
 
             <section className="drawer-section">
